@@ -31,13 +31,6 @@ node('master'){
             releaseRepo: "nxl_test-release-local",
             snapshotRepo: "nxl_test-snapshot-local"
         )
-        rtMavenRun(
-            tool: "maven_3.6.1",
-            goals: 'clean package',
-            opts: '-Dmaven.test.skip=true -Dmaven.repo.local=.repository',
-            deployerId: "MAVEN_DEPLOYER",
-            resolverId: "MAVEN_RESOLVER"
-        )
         def buildInfo = Artifactory.newBuildInfo()
         rtBuildInfo (
             captureEnv: true
@@ -54,6 +47,13 @@ node('master'){
                 "pattern": "nxl_test-snapshot-local",
                 "props": "filter-by-this-prop=yes"
             }]}"""
+        )
+        rtMavenRun(
+            tool: "maven_3.6.1",
+            goals: 'clean package',
+            opts: '-Dmaven.test.skip=true -Dmaven.repo.local=.repository',
+            deployerId: "MAVEN_DEPLOYER",
+            resolverId: "MAVEN_RESOLVER"
         )
     }
     
