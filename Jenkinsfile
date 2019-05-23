@@ -18,7 +18,7 @@ node('master'){
         )
     }
     stage('compile'){
-        def buildInfo
+        def server = Artifactory.getArtifactoryServer 'af'
         rtMavenResolver(
             id: "MAVEN_RESOLVER",
             serverId: "af",
@@ -31,7 +31,7 @@ node('master'){
             releaseRepo: "nxl_test-release-local",
             snapshotRepo: "nxl_test-snapshot-local"
         )
-        buildInfo = Artifactory.newBuildInfo()
+        def buildInfo = Artifactory.newBuildInfo()
         rtMavenRun(
             tool: "maven_3.6.1",
             goals: 'clean package',
