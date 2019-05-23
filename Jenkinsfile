@@ -50,7 +50,8 @@ node('master'){
             }]}"""
         )
         rtBuildInfo (
-            captureEnv: true
+            captureEnv: true,
+            buildInfo: buildInfo
         )
         server.publishBuildInfo buildInfo
     }
