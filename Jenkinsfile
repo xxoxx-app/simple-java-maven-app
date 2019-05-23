@@ -53,8 +53,8 @@ node('master'){
             "files": [{
                 "pattern": "nxl_test-snapshot-local",
                 "props": "filter-by-this-prop=yes"
-        }]}"""
-)
+            }]}"""
+        )
     }
     
 }
