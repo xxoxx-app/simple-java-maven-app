@@ -54,5 +54,9 @@ node('master'){
             }]}"""
         )
         server.publishBuildInfo buildInfo
+        rtPublishBuildInfo (
+            serverId: "af"
+            
+        )
     }
 }
