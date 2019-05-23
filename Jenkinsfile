@@ -38,20 +38,11 @@ node('master'){
             deployerId: "MAVEN_DEPLOYER",
             resolverId: "MAVEN_RESOLVER"
         )
-        rtSetProps (
-            serverId: "af",
-            props: 'build_url='+env.BUILD_URL,
-            spec: """{
-            "files": [{
-                "pattern": "nxl_test-*-local",
-                "props": "filter-by-this-prop=yes"
-            }]}"""
-        )
         def buildInfo = Artifactory.newBuildInfo()
         rtBuildInfo (
             captureEnv: true
         )
-        server.publishBuildInfo
+        server.publishBuildInfo buildInfo
     }
     
 }
