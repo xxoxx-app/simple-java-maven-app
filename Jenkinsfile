@@ -42,9 +42,8 @@ node('master'){
             props: 'p1=v1;p2=v2',     
             spec: """{
             "files": [{
-                "pattern": "nxl_test-snapshot-local/**/*.jar",
-                "props": "filter-by-this-prop=yes"
-            }]}"""
+                "pattern": "nxl_test-snapshot-local/**/*.jar"
+                }]}"""
         )
     }
 }
