@@ -49,7 +49,7 @@ node('master'){
         )
         def setPropsSpec = """{
             "files": [{
-                "pattern": "target/demo-app-*.jar",
+                "pattern": "target/*.jar",
                 "props": "filter-by-this-prop=yes"
             }]}"""
         server.setProps spec: setPropsSpec, props: "p3=v3", failNoOp: true
