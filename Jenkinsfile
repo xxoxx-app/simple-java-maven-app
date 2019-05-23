@@ -27,8 +27,8 @@ node('master'){
         rtMavenDeployer(
             id: "MAVEN_DEPLOYER",
             serverId: "af",
-            releaseRepo: "libs-release",
-            snapshotRepo: "libs-snapshot"
+            releaseRepo: "nxl_test-release-local",
+            snapshotRepo: "nxl_test-snapshot-local"
         )
         rtMavenRun(
             tool: "maven_3.6.1",
