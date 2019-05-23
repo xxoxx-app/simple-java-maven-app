@@ -18,7 +18,6 @@ node('master'){
         )
     }
     stage('compile'){
-        def server = Artifactory.server 'af'
         rtMavenResolver(
             id: "MAVEN_RESOLVER",
             serverId: "af",
