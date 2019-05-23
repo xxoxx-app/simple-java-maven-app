@@ -53,7 +53,7 @@ node('master'){
                 "props":"build.number=${BUILD_NUMBER}"
             }]}"""
         )
-        echo buildInfo
+        println(buildInfo)
         rtPublishBuildInfo (
             serverId: "af"
         )
