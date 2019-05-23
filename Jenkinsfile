@@ -32,6 +32,10 @@ node('master'){
             snapshotRepo: "nxl_test-snapshot-local"
         )
         def buildInfo = Artifactory.newBuildInfo()
+        rtBuildInfo (
+            captureEnv: true,
+            buildInfo: buildInfo
+        )        
         rtMavenRun(
             tool: "maven_3.6.1",
             goals: 'clean package',
@@ -48,10 +52,6 @@ node('master'){
                 "pattern": "nxl_test-snapshot-local/**/*.jar",
                 "props":"build.number=${BUILD_NUMBER}"
             }]}"""
-        )
-        rtBuildInfo (
-            captureEnv: true,
-            buildInfo: buildInfo
         )
         server.publishBuildInfo buildInfo
     }
