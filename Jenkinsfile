@@ -30,6 +30,16 @@ node('master'){
             releaseRepo: "nxl_test-release-local",
             snapshotRepo: "nxl_test-snapshot-local"
         )
+        rtSetProps (
+            serverId: "af",
+            props: 'build_url='+env.BUILD_URL,
+            spec: """{
+            "files": [{
+                "pattern": "target/demo-app-*.jar",
+                "props": "filter-by-this-prop=yes"
+            }]}"""
+        )
+        server.setProps spec: setPropsSpec, props: “p1=v1;p2=v2”
         rtMavenRun(
             tool: "maven_3.6.1",
             goals: 'clean package -Dmaven.test.skip=true -Dmaven.repo.local=.repository',
