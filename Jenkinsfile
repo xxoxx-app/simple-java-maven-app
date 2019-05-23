@@ -18,7 +18,6 @@ node('master'){
         )
     }
     stage('compile'){
-        def server = Artifactory.server 'af'
         rtMavenResolver(
             id: "MAVEN_RESOLVER",
             serverId: "af",
@@ -31,16 +30,6 @@ node('master'){
             releaseRepo: "nxl_test-release-local",
             snapshotRepo: "nxl_test-snapshot-local"
         )
-
-        rtSetProps (
-            serverId: "af",
-            props: 'p1=v1;p2=v2',     
-            spec: """{
-            "files": [{
-                "pattern": "nxl_test-snapshot-local",
-                "props": "filter-by-this-prop=yes"
-            }]}"""
-        )
         rtMavenRun(
             tool: "maven_3.6.1",
             goals: 'clean package',
@@ -48,6 +37,14 @@ node('master'){
             deployerId: "MAVEN_DEPLOYER",
             resolverId: "MAVEN_RESOLVER"
         )
+        rtSetProps (
+            serverId: "af",
+            props: 'p1=v1;p2=v2',     
+            spec: """{
+            "files": [{
+                "pattern": "nxl_test-snapshot-local/*.jar",
+                "props": "filter-by-this-prop=yes"
+            }]}"""
+        )
     }
-    
 }
