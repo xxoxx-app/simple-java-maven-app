@@ -43,21 +43,13 @@ node('master'){
             props: 'build_url='+env.BUILD_URL,
             spec: """{
             "files": [{
-                "pattern": "target/demo-app-*.jar",
+                "pattern": "nxl_test-*-local",
                 "props": "filter-by-this-prop=yes"
             }]}"""
         )
-        def setPropsSpec = """{
-            "files": [{
-                "pattern": "./target/*.jar",
-                "props": "filter-by-this-prop=yes"
-            }]}"""
-        server.setProps spec: setPropsSpec, props: "p3=v3", failNoOp: true
+        def buildInfo = Artifactory.newBuildInfo()
         rtBuildInfo (
             captureEnv: true
-        )
-        rtPublishBuildInfo (
-            serverId: "af"
         )
         server.publishBuildInfo
     }
