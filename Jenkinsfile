@@ -39,10 +39,11 @@ node('master'){
         )
         rtSetProps (
             serverId: "af",
-            props: 'p1=v1;p2=v2',     
+            props: 'build_url='+env.BUILD_URL,     
             spec: """{
             "files": [{
-                "pattern": "nxl_test-snapshot-local/**/*.jar"
+                "pattern": "nxl_test-snapshot-local/**/*.jar",
+                "props":"build.number=${BUILD_NUMBER}"
                 }]}"""
         )
     }
