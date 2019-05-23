@@ -31,18 +31,15 @@ node('master'){
             releaseRepo: "nxl_test-release-local",
             snapshotRepo: "nxl_test-snapshot-local"
         )
-        def buildInfo = Artifactory.newBuildInfo()
         rtBuildInfo (
-            captureEnv: true,
-            buildInfo: buildInfo
+            captureEnv: true
         )        
         rtMavenRun(
             tool: "maven_3.6.1",
             goals: 'clean package',
             opts: '-Dmaven.test.skip=true -Dmaven.repo.local=.repository',
             deployerId: "MAVEN_DEPLOYER",
-            resolverId: "MAVEN_RESOLVER",
-            buildInfo: buildInfo
+            resolverId: "MAVEN_RESOLVER"
         )
         rtSetProps (
             serverId: "af",
@@ -53,7 +50,6 @@ node('master'){
                 "props":"build.number=${BUILD_NUMBER}"
             }]}"""
         )
-        println(buildInfo)
         rtPublishBuildInfo (
             serverId: "af"
         )
