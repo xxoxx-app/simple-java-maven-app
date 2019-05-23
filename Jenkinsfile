@@ -36,8 +36,8 @@ node('master'){
         )
         rtPublishBuildInfo (
             serverId: "af"
-            server.publishBuildInfo
         )
+        server.publishBuildInfo
         rtMavenRun(
             tool: "maven_3.6.1",
             goals: 'clean package',
