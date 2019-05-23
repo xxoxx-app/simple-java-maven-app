@@ -31,13 +31,6 @@ node('master'){
             releaseRepo: "nxl_test-release-local",
             snapshotRepo: "nxl_test-snapshot-local"
         )
-        rtBuildInfo (
-            captureEnv: true
-        )
-        rtPublishBuildInfo (
-            serverId: "af"
-        )
-        server.publishBuildInfo
         rtMavenRun(
             tool: "maven_3.6.1",
             goals: 'clean package',
@@ -59,7 +52,14 @@ node('master'){
                 "pattern": "target/demo-app-*.jar",
                 "props": "filter-by-this-prop=yes"
             }]}"""
-        server.setProps spec: setPropsSpec, props: "p3=v3", failNoOp: true        
+        server.setProps spec: setPropsSpec, props: "p3=v3", failNoOp: true
+        rtBuildInfo (
+            captureEnv: true
+        )
+        rtPublishBuildInfo (
+            serverId: "af"
+        )
+        server.publishBuildInfo
     }
     
 }
