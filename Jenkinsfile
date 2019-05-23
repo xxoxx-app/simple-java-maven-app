@@ -42,7 +42,11 @@ node('master'){
         rtBuildInfo (
             captureEnv: true
         )
+        rtPublishBuildInfo (
+            serverId: "af"
+        )
         server.publishBuildInfo buildInfo
+        
     }
     
 }
