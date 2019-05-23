@@ -18,6 +18,7 @@ node('master'){
         )
     }
     stage('compile'){
+        def server = Artifactory.server 'af'
         rtMavenResolver(
             id: "MAVEN_RESOLVER",
             serverId: "af",
@@ -30,6 +31,20 @@ node('master'){
             releaseRepo: "nxl_test-release-local",
             snapshotRepo: "nxl_test-snapshot-local"
         )
+        rtBuildInfo (
+            captureEnv: true
+        )
+        rtPublishBuildInfo (
+            serverId: "af"
+            server.publishBuildInfo
+        )
+        rtMavenRun(
+            tool: "maven_3.6.1",
+            goals: 'clean package',
+            opts: '-Dmaven.test.skip=true -Dmaven.repo.local=.repository',
+            deployerId: "MAVEN_DEPLOYER",
+            resolverId: "MAVEN_RESOLVER"
+        )
         rtSetProps (
             serverId: "af",
             props: 'build_url='+env.BUILD_URL,
@@ -39,19 +54,12 @@ node('master'){
                 "props": "filter-by-this-prop=yes"
             }]}"""
         )
-        rtBuildInfo (
-            captureEnv: true
-        )
-        rtPublishBuildInfo (
-            serverId: "af"
-        )
-        rtMavenRun(
-            tool: "maven_3.6.1",
-            goals: 'clean package',
-            opts: '-Dmaven.test.skip=true -Dmaven.repo.local=.repository',
-            deployerId: "MAVEN_DEPLOYER",
-            resolverId: "MAVEN_RESOLVER"
-        )
+        def setPropsSpec = """{
+            "files": [{
+                "pattern": "target/demo-app-*.jar",
+                "props": "filter-by-this-prop=yes"
+            }]}"""
+        server.setProps spec: setPropsSpec, props: "p3=v3", failNoOp: true        
     }
     
 }
