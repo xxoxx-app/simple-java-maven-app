@@ -1,6 +1,6 @@
 node('master'){
     stage('Clean workspace'){
-        cleanWs()
+        //cleanWs()
     }
     stage('fetch code'){
         checkout(
@@ -32,7 +32,7 @@ node('master'){
         )
         rtMavenRun(
             tool: "maven_3.6.1",
-            goals: 'clean package -U -Dmaven.test.skip=true -Dmaven.repo.local=.repository',
+            goals: 'clean package -Dmaven.test.skip=true -Dmaven.repo.local=.repository',
             deployerId: "MAVEN_DEPLOYER",
             resolverId: "MAVEN_RESOLVER"
         )
