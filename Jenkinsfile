@@ -39,12 +39,16 @@ node('master'){
                 "props": "filter-by-this-prop=yes"
             }]}"""
         )
+        rtBuildInfo (
+            captureEnv: true
+        )
         rtPublishBuildInfo (
-                serverId: "af"
+            serverId: "af"
         )
         rtMavenRun(
             tool: "maven_3.6.1",
-            goals: 'clean package -Dmaven.test.skip=true -Dmaven.repo.local=.repository',
+            goals: 'clean package',
+            opts: '-Dmaven.test.skip=true -Dmaven.repo.local=.repository',
             deployerId: "MAVEN_DEPLOYER",
             resolverId: "MAVEN_RESOLVER"
         )
