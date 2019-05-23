@@ -31,14 +31,7 @@ node('master'){
             releaseRepo: "nxl_test-release-local",
             snapshotRepo: "nxl_test-snapshot-local"
         )
-        def buildInfo = Artifactory.newBuildInfo()
-        rtBuildInfo (
-            captureEnv: true
-        )
-        rtPublishBuildInfo (
-            serverId: "af"
-        )
-        server.publishBuildInfo buildInfo
+
         rtSetProps (
             serverId: "af",
             props: 'p1=v1;p2=v2',     
