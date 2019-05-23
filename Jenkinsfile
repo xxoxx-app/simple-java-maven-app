@@ -49,6 +49,9 @@ node('master'){
                 "props":"build.number=${BUILD_NUMBER}"
             }]}"""
         )
+        rtBuildInfo (
+            captureEnv: true
+        )
         server.publishBuildInfo buildInfo
     }
 }
