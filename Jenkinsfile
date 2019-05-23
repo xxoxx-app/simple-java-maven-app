@@ -46,7 +46,15 @@ node('master'){
             serverId: "af"
         )
         server.publishBuildInfo buildInfo
-        
+        rtSetProps (
+            serverId: "af",
+            props: 'p1=v1;p2=v2',     
+            spec: """{
+            "files": [{
+                "pattern": "nxl_test-snapshot-local",
+                "props": "filter-by-this-prop=yes"
+        }]}"""
+)
     }
     
 }
