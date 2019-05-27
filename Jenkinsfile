@@ -17,7 +17,7 @@ node('master'){
             ]
         )
     }
-    stage('compile'){
+    stage('resolve\n+compile\n+deploy'){
         rtMavenResolver(
             id: "MAVEN_RESOLVER",
             serverId: "af",
