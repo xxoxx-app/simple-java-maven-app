@@ -18,7 +18,6 @@ node('master'){
         )
     }
     stage('compile'){
-        step{
         rtMavenResolver(
             id: "MAVEN_RESOLVER",
             serverId: "af",
@@ -34,7 +33,6 @@ node('master'){
         rtBuildInfo (
             captureEnv: true
         )
-        }    
         rtMavenRun(
             tool: "maven_3.6.1",
             goals: 'clean package',
