@@ -1,7 +1,7 @@
 pipeline {
   agent {
-    docker {
-      image 'maven:3.6.1'
+    node {
+      label 'docker_master'
     }
 
   }
