@@ -1,9 +1,6 @@
 pipeline {
     agent {
-        docker {
-            image 'maven:3-alpine' 
-            args '-v /opt/maven_localdata:/root/.m2' 
-        }
+        label 'docker_runner'
     }
     stages {
         stage('Build') { 
